@@ -69,10 +69,10 @@ ZSH_THEME="bira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	zsh-history-substring-search
-	)
+        zsh-autosuggestions
+        zsh-syntax-highlighting
+        zsh-history-substring-search
+        )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,3 +108,8 @@ alias ll='ls -al'
 alias sts='systemctl --type=service'
 alias relssh='sudo systemctl reload sshd'
 alias cpv='rsync -ah --info=progress2'
+alias t='tmux'
+alias ta='t a -t'
+alias tls='t ls'
+alias tn='t new -t'
+alias tk='t kill-session -t'
