@@ -1,0 +1,135 @@
+# GENERAL
+alias ip4='ip -4 -c a'
+alias ll='ls -laFhv'
+alias relssh='sudo systemctl restart sshd'
+alias sshk='kitty +kitten ssh' # SSH using Kitty with term info
+alias vim='nvim'
+alias sudo='sudo '
+
+# COMPRESSION
+alias untargz='tar --same-owner -zxvf '
+alias untarbz='tar --same-owner -xjvf '
+alias lstargz='tar -ztvf '
+alias lstarbz='tar -jtvf '
+alias targz='tar -zcvf '
+alias tarbz='tar -cjvf '
+
+# NAVIGATION
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# SYNC AND COPY
+alias cpn='cp --verbose' # Native copy.
+alias cp='sudo rsync -azh --info=progress2' # Copy files with rsync.
+alias mv='mv --verbose' # Native move.
+
+# SEARCH AND FIND
+alias gh='history|grep' # Search bash history.
+alias find='sudo find / -name'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# FILE SIZE AND STORAGE
+alias fdisk='sudo fdisk -l'
+alias lt='sudo ls -laF --human-readable --color=auto --size -1 -S --classify' # File size sorted.
+alias lsr='sudo ls --color=auto -t -1' # Recently modified.
+alias mnt='sudo mount | grep -E ^/dev | column -t' # Show mounted drives.
+alias dirsize='sudo du -hx --max-depth=1'
+alias dirusage='sudo du -ch 2>/dev/null | grep total' # Grabs the disk usage in the current directory, suppresses read permission errors.
+alias diskusage='sudo df -hl --total | grep total' # Gets the total disk usage on your machine.
+alias partusage='sudo df -hlT --exclude-type=tmpfs --exclude-type=devtmpfs' # Shows the individual partition usages without the temporary memory values.
+alias usage10='sudo du -hsx * 2>/dev/null | sort -rh | head -10' # Gives you what is using the most space, both directories and files. Varies on current directory.
+
+# BASH
+alias baupdate='source ~/.bashrc'
+alias baedit='vim /home/nick/.bash_aliases'
+
+# ZSH
+alias zshupdate='source ~/.zshrc'
+
+# UFW FIREWALL
+alias ufwenable='sudo ufw enable' # Enable UFW Firewall.
+alias ufwdisable='sudo ufw disable' # Disable UFW Firewall.
+alias ufwallow='sudo ufw allow ' # Add allow entry to UFW Firewall.
+alias ufwlimit='sudo ufw limit ' # Rate limit protocol.
+alias ufwlist='sudo ufw status numbered' # Show the status of the firewall rules with rule numbers.
+alias ufwdelete='sudo ufw delete '
+alias ufwreload='sudo ufw reload'
+
+# SYSTEMD START, STOP AND RESTART
+alias ctlreload='sudo systemctl daemon-reload'
+alias ctlstart='sudo systemctl start'
+alias ctlstop='sudo systemctl stop'
+alias ctlrestart='sudo systemctl restart'
+alias ctlstatus='sudo systemctl status'
+alias ctlenable='sudo systemctl enable'
+alias ctldisable='sudo systemctl disable'
+alias ctlactive='sudo systemctl is-active'
+alias sts='systemctl --type=service'
+
+# INSTALLATION AND UPGRADE
+alias distup='sudo apt update && sudo apt upgrade -y'
+alias finstall='sudo apt-get -f install'
+alias install='sudo apt-get install'
+alias rinstall='sudo apt-get -f install --reinstall'
+alias search='sudo apt-cache search'
+alias uninstall='sudo apt-get remove'
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get update && sudo apt-get upgrade'
+
+# CLEANING
+alias clean='sudo apt-get clean && sudo apt-get autoclean'
+alias cleanall='clean && remove && deorphan && purge'
+alias deorphan='sudo deorphan | xargs sudo apt-get -y remove --purge'
+alias purge='sudo apt-get purge'
+alias remove='sudo apt-get remove && sudo apt-get autoremove'
+
+# SHUTDOWN AND RESTART
+alias shutdown='sudo shutdown -h now'
+alias reboot='sudo shutdown now -r'
+
+# NETWORKING
+alias header='curl -I' # Get web server headers.
+alias ipe='curl ipinfo.io/ip; echo' # Public ip.
+alias ipi='ifconfig getifaddr ens18' # Private ip.
+alias ping='ping -c 5'
+alias showlistening='lsof -i -n | egrep "COMMAND|LISTEN"'
+alias listen='sudo netstat -tulpn | grep LISTEN'
+alias showports='sudo netstat -lnptu'
+
+# SYSTEM MONITORING
+alias ctop='sudo ctop'
+alias cpuinfo='lscpu' # Get server cpu info
+alias free='free -h'
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log' # get GPU ram on desktop / laptop
+alias meminfo='free -m -l -t' # memory usage
+alias pscpu='ps auxf | sort -nr -k 3' # get top process eating cpu
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10' # get top process eating cpu
+alias psmem='ps auxf | sort -nr -k 4' # get top process eating memory
+alias psmem10='ps auxf | sort -nr -k 4 | head -10' # get top process eating memory
+
+# DOCKER & DOCKER COMPOSE
+alias dcf='sudo docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | (sed -u 1q; sort) ' # List running container names, status, and ports in use.
+alias dci='sudo docker images'
+alias dcup='sudo docker compose up -d --build --remove-orphans' # Start all Docker containers, remove orphaned containers.
+alias dcdown='sudo docker compose down --remove-orphans' # Bring down (stop/remove) running Docker containers, remove orphaned containers.
+alias dcrec='sudo docker compose up -d --force-recreate' # Start new and recreate existing Docker containers.
+alias ddelimages='sudo docker rmi $(docker images -q)' # Remove all unused images.
+alias dprunesys='sudo docker system prune -a' # Removes all stopped containers, networks not in use by a container, dangling images, and build cache.
+alias dprunevol='sudo docker volume prune' # Prune (remove) Docker volumes.
+alias dstopall='sudo docker stop $(docker ps -aq)' # Stop all Docker containers.
+alias dexec='sudo docker exec -ti' # Run commands on the Docker container directly.
+alias dpsa='sudo docker ps -a' # List all containers.
+alias ddf='sudo docker system df' # Show stats for the Docker system (guests, not host).
+alias dlogs='sudo docker logs -tf --tail="50" ' # Show last 50 log entries for the specified Docker container and show realtime logs.
+alias dp600='sudo chown -R root:root /home/nick/docker/secrets ; sudo chmod -R 600 /home/nick/docker/secrets ; sudo chown -R root:root /home/nick/docker/.env ; sudo chmod -R 600 /home/nick/docker/.env' # Sets sensitive file permissions and owner.
+alias dp777='sudo chown -R nick:nick /home/nick/docker/secrets ; sudo chmod -R 777 /home/nick/docker/secrets ; sudo chown -R nick:nick /home/nick/docker/.env ; sudo chmod -R 777 /home/nick/docker/.env'
+alias dclogs='sudo docker compose logs -tf --tail="50" '
+alias dcstop='sudo docker compose stop'
+alias dcrestart='sudo docker compose restart'
+alias dcpull='sudo docker compose pull'
