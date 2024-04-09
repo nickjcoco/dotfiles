@@ -24,25 +24,20 @@ else
     exit 1
 fi
 
-# Git clone aliases and zshrc files
-git clone git@github.com:nickjcoco/dotfiles.git
-
-# Copy aliases and zshrc files to home directory
-cp $HOME/dotfiles/.aliases $HOME/.aliases
-cp $HOME/dotfiles/.zshrc $HOME/.zshrc && source $HOME/.zshrc
-
 # Install oh-my-zsh and clone plugins
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 
+# Copy aliases and zshrc files to home directory
+cp $HOME/dotfiles/.aliases $HOME/.aliases
+cp $HOME/dotfiles/.zshrc $HOME/.zshrc && source $HOME/.zshrc
+
 # Install tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
 
 echo "Apps installed!"
-
-
 
 # Test the configuration
 echo "Testing git configuration..."
