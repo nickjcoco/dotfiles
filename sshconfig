@@ -1,0 +1,42 @@
+# SSH config file for local VMs and services
+
+Host docker
+	Hostname 192.168.0.215
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host htpvm
+	Hostname 192.168.0.85
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host omada
+	Hostname 192.168.0.86
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host raspotify
+	Hostname 192.168.0.82
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host spoopylogs
+	Hostname 192.168.0.78
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host spoopyNAS
+	Hostname 192.168.0.28
+	Port 49022
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host workdocker
+	Hostname 192.168.0.76
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
+
+Host yams
+	Hostname 192.168.0.83
+	User nick
+	IdentityFile ~/.ssh/id_ed25519
