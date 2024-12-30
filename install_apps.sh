@@ -31,11 +31,32 @@ else
     exit 1
 fi
 
+# # Install oh-my-zsh and clone plugins
+# if ! command -v zsh >/dev/null 2>&1; then
+#     echo "zsh is not installed properly. Skipping oh-my-zsh installation."
+# else
+#     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || echo "Failed to install oh-my-zsh"
+#     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || echo "Failed to clone zsh-autosuggestions"
+#     git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || echo "Failed to clone zsh-syntax-highlighting"
+#     git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search || echo "Failed to clone zsh-history-substring-search"
+# fi
+
 # Install oh-my-zsh and clone plugins
 if ! command -v zsh >/dev/null 2>&1; then
     echo "zsh is not installed properly. Skipping oh-my-zsh installation."
 else
+    # Set zsh as the default shell
+    if [ "$(basename "$SHELL")" != "zsh" ]; then
+        echo "Setting zsh as the default shell..."
+        chsh -s $(which zsh) || echo "Failed to set zsh as the default shell"
+    fi
+
+    # Install oh-my-zsh non-interactively
+    echo "Installing oh-my-zsh..."
+    export RUNZSH=no  # Prevents the installer from running zsh immediately after installation
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || echo "Failed to install oh-my-zsh"
+
+    # Clone plugins
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions || echo "Failed to clone zsh-autosuggestions"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || echo "Failed to clone zsh-syntax-highlighting"
     git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search || echo "Failed to clone zsh-history-substring-search"
